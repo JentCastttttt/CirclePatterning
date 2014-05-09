@@ -1,0 +1,2402 @@
+/* Localized versions of Info.plist keys */
+
+
+////
+////  EcmcViewController.m
+////  ecmc
+////
+////  Created by cp9 on 13-1-7.
+////  Copyright (c) 2013年 cp9. All rights reserved.
+////
+//
+//#import "EcmcViewController.h"
+//#import "Global.h"
+//#import "Utilities.h"
+//#import "PublicDefinitions.h"
+//#import "UIColor+extend.h"
+//#import "UserInfoContext.h"
+//#import "JSON.h"
+//#import "FileDownloadServices.h"
+//
+//#import "PushHotWeb.h"
+//#import "WebViewCustom.h"
+//#import "CustomMenuViewController.h"
+//
+//#import "SearchViewController.h"
+//#import "ScanViewController.h"
+//
+//#import "llcxViewController.h"
+//#import "CallPromotionsView.h"
+//#import "PackageMarginView.h"
+//#import "NewRingViewController.h"
+//#import "EcmcAppDelegate.h"
+//#import "pushInterface.h"
+//
+//// 分类导航(业务分类)
+//#import "BusinessViewController.h"
+//
+//// 业务办理
+//#import "BisDealViewController.h"
+//#import "HotPushForMonthView.h"
+//#import "HotPhoneController.h"
+//
+//#import "BillQueryViewController.h"
+//
+////已开通业务
+//#import "OpenedServicesViewController.h"
+//
+//// WLAN热点
+//#import "WLanSearchViewController.h"
+//
+//#import "checkVersion.h"
+//
+////附近营业厅
+//#import "MapViewController.h"
+//
+////在线客服
+//#import "OnlineRootControll.h"
+//
+////分享
+//#import "newShareViewConroller.h"
+//
+//#define kMainTipHeight 10.0f
+//
+//#define kTagMainLeftButton 200
+//
+//#define kHomeAdLastRefreshData @"HomeAdLastRefreshData"
+//
+//@interface EcmcViewController ()
+//
+//@end
+//
+//@implementation EcmcViewController
+//@synthesize joinUrl;
+////@synthesize arrHomeSelectIcon;
+////@synthesize loginConnection,responseData;
+//
+//#pragma mark - button
+//- (void)ButtonLogin
+//{
+//    UserInfo *userInfo = [UserInfoContext sharedUserInfoContext].userInfo;
+//    if (userInfo.isLogin)
+//    {
+//        [[self getCustomTabBarController] selectIndex:3];
+//    }
+//    else {
+//        LoginViewController *controller = [[LoginViewController alloc] init];
+//        [self presentModalViewController:controller animated:NO];
+//        [controller release];
+//    }
+//}
+//
+//- (void)ButtonCamera
+//{
+//    [self beginScan];
+//    //    ScanViewController *controller = [[ScanViewController alloc] init];
+//    //    [self.navigationController pushViewController:controller animated:YES];
+//    //    [controller release];
+//}
+//
+//#pragma mark - scan
+//-(void) beginScan
+//{
+//    #if TARGET_IPHONE_SIMULATOR
+//    
+//    #elif TARGET_OS_IPHONE
+//    ZBarReaderViewController *reader = [[ZBarReaderViewController alloc]init];
+//    
+//    for (UIView *temp in [reader.view subviews])
+//    {
+//        if ([temp isKindOfClass:[UIView class]])
+//        {
+//            temp.backgroundColor = [UIColor clearColor];
+//        }
+//    }
+//    
+//    UIImageView *redImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 105, 320, 2)];
+//    redImg.backgroundColor = [UIColor redColor];
+//    redImg.alpha = 0.9;
+//    [reader.view addSubview:redImg];
+//    [redImg release];
+//    
+//    CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"position.y"];
+//    animation.fromValue = [NSNumber numberWithFloat: 105];
+//    animation.toValue = [NSNumber numberWithFloat:kScreenHeight(self)-105+30];
+//    animation.duration = 3;//pString.length/0.5;
+//    animation.removedOnCompletion = NO;
+//    animation.repeatCount = 1000;
+//    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+//    [redImg.layer addAnimation:animation forKey:@"position.y" ];
+//    
+//    UIView * upView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 105)];
+//    upView.alpha = 0.7;
+//    upView.backgroundColor = [UIColor blackColor];
+//    [reader.view addSubview:upView];
+//    [upView release];
+//    
+//    UILabel *textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 45, 320, 42)];
+//    textLabel.backgroundColor = [UIColor clearColor];
+//    textLabel.textColor = [UIColor whiteColor];
+//    textLabel.textAlignment = UITextAlignmentCenter;
+//    textLabel.numberOfLines = 2;
+//    textLabel.font = [UIFont systemFontOfSize:15];
+//    textLabel.text = @"请将二维码、条码置于取\n景框内，即可实现自动扫描";
+//    [reader.view addSubview:textLabel];
+//    
+//    UIView * downView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight(self)-105+30, 320, 105)];
+//    downView.alpha = 0.7;
+//    downView.backgroundColor = [UIColor blackColor];
+//    [reader.view addSubview:downView];
+//    [downView release];
+//    
+//    reader.cameraOverlayView = nil;
+//    reader.readerDelegate = self;
+//    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
+//	
+//    reader.showsZBarControls = NO;
+//    ZBarImageScanner *scanner = reader.scanner;
+//    
+//    [scanner setSymbology: ZBAR_I25
+//    config: ZBAR_CFG_ENABLE
+//    to: 0];
+//    reader.title = @"扫一扫";
+//    reader.navigationItem.hidesBackButton = YES;
+//    
+//    //nav button
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button addTarget:self
+//    action:@selector(navBackBtnClick)
+//    forControlEvents:UIControlEventTouchUpInside];
+//    UIImage *imageBg = [Utilities loadImageByName:@"navBar_left_button@2x.png"];
+//    button.frame = CGRectMake(0, 0, imageBg.size.width, imageBg.size.height);
+//    [button setBackgroundImage:imageBg
+//    forState:UIControlStateNormal];
+//    [button setBackgroundImage:[Utilities loadImageByName:@"navBar_left_button_highlighted@2x.png"]
+//    forState:UIControlStateHighlighted];
+//    [button setImage:[Utilities loadImageByName:@"navBar_back@2x.png"] forState:UIControlStateNormal];
+//    [button setAdjustsImageWhenHighlighted:NO];
+//    [self.navigationController.navigationBar addSubview:button];
+//    
+//    [self.navigationController pushViewController:reader animated:YES];
+//    [[self getCustomTabBarController] hideCustomTabbar:YES Animation:YES];
+//    [reader release];
+//    
+//    #endif
+//}
+//
+//- (void)navBackBtnClick
+//{
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
+//
+//- (void) imagePickerController: (UIImagePickerController*) reader didFinishPickingMediaWithInfo: (NSDictionary*) info
+//{
+//    #if TARGET_IPHONE_SIMULATOR
+//    
+//    #elif TARGET_OS_IPHONE
+//    // ADD: get the decode results
+//    id<NSFastEnumeration> results =
+//    [info objectForKey: ZBarReaderControllerResults];
+//    ZBarSymbol *symbol = nil;
+//    for(symbol in results)
+//    // EXAMPLE: just grab the first barcode
+//    break;
+//	
+//	NSString* str = symbol.data;
+//    
+//    ScanViewController *scanViewController = [[ScanViewController alloc]init];
+//    scanViewController.str = str;
+//	
+//	if([str hasPrefix: @"http"])
+//	{
+//        scanViewController.isURL = YES;
+//	}
+//	else
+//	{
+//        scanViewController.isURL = NO;
+//	}
+//	
+//    [self.navigationController popViewControllerAnimated:NO];
+//    scanViewController.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:scanViewController animated:NO];
+//    [scanViewController release];
+//    #endif
+//}
+//
+//- (void)ButtonSearch
+//{
+//    SearchViewController *controller = [[SearchViewController alloc] init];
+//    controller.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:controller animated:YES];
+//    [controller release];
+//    
+//    return;
+//    [[self getCustomTabBarController] selectIndex:2];
+//}
+//
+//#pragma mark - login delegate
+//- (void)jumpto:(int)index
+//{
+//    if (-1 == index) {
+//        return;
+//    }
+//    isFromLogin = YES;
+//    [self goToViewController:[NSNumber numberWithInt:index]];
+//}
+//
+//#pragma mark - homeadview delegate
+//- (void)HomeAdViewClicked:(NSString *)str
+//{
+//    if (!str || 0 == str.length) {
+//        return;
+//    }
+//    UserInfo *userInfo = [UserInfoContext sharedUserInfoContext].userInfo;
+//    //meter
+//    if ([str isEqualToString:@"0"]) {
+//        if (userInfo.isLogin)
+//        {
+//            llcxViewController *controller = [[llcxViewController alloc] init];
+//            [controller setHidesBottomBarWhenPushed:YES];
+//            [self.navigationController pushViewController:controller animated:YES];
+//            
+//            [controller release];
+//        }
+//        else
+//        {
+//            LoginViewController *controller = [[LoginViewController alloc] init];
+//            controller.delegate = self;
+//            controller.index = 7;
+//            [self presentModalViewController:controller animated:NO];
+//            [controller release];
+//        }
+//    }
+//    //info
+//    else if ([str isEqualToString:@"1"]) {
+//        [[self getCustomTabBarController] selectIndex:3];
+//    }
+//    //tip
+//    else if ([str isEqualToString:@"2"]) {
+//        SearchViewController *controller = [[SearchViewController alloc] init];
+//        controller.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:controller animated:YES];
+//        [controller release];
+//    }
+//    else
+//    {
+//        PushHotWeb *webView = [[PushHotWeb alloc] init];
+//        webView.urlString = str;
+//        [webView  setHidesBottomBarWhenPushed:YES];
+//        webView.title = @"当月热推";
+//        [self.navigationController pushViewController:webView animated:YES];
+//        [webView release];
+//    }
+//}
+//
+//#pragma -mark loginPwd
+///*
+// - (void)checkLoginPwd:(NSString *)pwd
+// {
+// NSString *alertTextStr = [pwd stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+// 
+// NSURL* url = [NSURL URLWithString:[Constant wyServerUrl]];
+// 
+// NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url
+// cachePolicy:NSURLRequestReloadIgnoringCacheData
+// timeoutInterval:30];
+// 
+// NSString *strNumber = [[NSUserDefaults standardUserDefaults] objectForKey:kUD_MyPhoneNumber];
+// NSString *strReq = Interface_Login_ln(strNumber, alertTextStr);
+// 
+// NSMutableData* postBody = [NSMutableData data];
+// [postBody appendData:[[NSString stringWithFormat:@"%@", strReq] dataUsingEncoding:NSUTF8StringEncoding]];
+// [urlRequest setHTTPMethod:@"POST"];
+// [urlRequest setValue:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1" forHTTPHeaderField:@"User-Agent"];
+// [urlRequest setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+// [urlRequest setValue:@"iphone" forHTTPHeaderField:@"platform"];
+// NSDictionary *dict = [[NSBundle mainBundle] infoDictionary];
+// NSString *currentVersion = [dict objectForKey:@"CFBundleVersion"];
+// [urlRequest setValue:currentVersion forHTTPHeaderField:@"version"];
+// [urlRequest setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+// [urlRequest setHTTPBody:postBody];
+// 
+// responseData = [[NSMutableData data]retain];
+// NSLog(@"sendSynchronousRequest");
+// 
+// //    NSURLConnection *urlConnection = [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+// 
+// NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+// 
+// self.loginConnection = conn;
+// [conn release];
+// 
+// }
+// 
+// - (void)showProgressHUD
+// {
+// if(HUD)
+// {
+// [self removeHUD];
+// }
+// HUD = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].keyWindow];
+// [[UIApplication sharedApplication].keyWindow addSubview:HUD];
+// 
+// HUD.mode = MBProgressHUDModeCustomView;
+// 
+// HUD.delegate = self;
+// HUD.detailsLabelText = [MBProgressHUD getSimpleRequery];
+// 
+// HUD.dimBackground = YES;
+// [HUD show:YES];
+// }
+// 
+// - (void)removeHUD
+// {
+// if (HUD) {
+// [HUD hide:YES];
+// [HUD removeFromSuperview];
+// HUD.delegate = nil;
+// [HUD release];
+// HUD = nil;
+// }
+// }
+// 
+// - (void)hudWasHidden:(MBProgressHUD *)hud
+// {
+// [HUD removeFromSuperview];
+// HUD.delegate = nil;
+// [HUD release];
+// HUD = nil;
+// }
+// 
+// - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response
+// {
+// [self showProgressHUD];
+// return request;
+// }
+// 
+// - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+// {
+// [responseData appendData:data];
+// }
+// 
+// - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+// {
+// [responseData setLength:0];
+// }
+// 
+// - (void)connectionDidFinishLoading:(NSURLConnection *)connection
+// {
+// if(loginConnection)
+// {
+// [loginConnection release];
+// loginConnection = nil;
+// }
+// [self loginSuccess:responseData];
+// }
+// 
+// - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+// {
+// //    NSString *errorInfo = [error localizedDescription];
+// //    NSLog(@"服务器连接失败：%@",errorInfo);
+// if(loginConnection)
+// {
+// [loginConnection release];
+// loginConnection = nil;
+// }
+// [self removeHUD];
+// [Utilities MsgBox:@"请求超时，请重新验证"];
+// }
+// 
+// -(BOOL)loginSuccess:(id)data
+// {
+// [self removeHUD];
+// if (!data) {
+// return NO;
+// }
+// 
+// BOOL bResult = YES;
+// NSString *strResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+// NSDictionary *dicJson = [strResult JSONValue];
+// [strResult release];
+// 
+// if (0 == [dicJson count])
+// {
+// [Utilities MsgBox:@"服务器连接出错，请稍后再试！"];
+// return NO;
+// }
+// 
+// NSDictionary *dicLogin = [dicJson objectForKey:@"loginNode2"];
+// NSString *strResultCode = [dicLogin objectForKey:@"resultCode"];
+// 
+// //正确，返回结果
+// if ([strResultCode isEqualToString:@"1"])
+// {
+// UserInfo *userInfo = [UserInfoContext sharedUserInfoContext].userInfo;
+// userInfo.hasLoginPwd = YES;
+// 
+// BisDealViewController *btViewController = [[BisDealViewController alloc] init];
+// [btViewController setHidesBottomBarWhenPushed:YES];
+// if(isFromLogin)
+// {
+// btViewController.isAnimation = NO;
+// }
+// [self.navigationController pushViewController:btViewController animated:YES];
+// 
+// [btViewController release], btViewController = nil;
+// 
+// bResult = YES;
+// }
+// else
+// {
+// [Utilities MsgBox:@"尊敬的客户您好，验证码输入不正确。"];
+// bResult = NO;
+// }
+// return bResult;
+// }
+// */
+//
+////1 业务办理 +
+////2 热卖手机 +
+////3 充值优惠 +
+////4 当月热推
+////5 已开服务
+////6 账单查询
+////7 流量查询
+////8 套餐余量
+////9 WLAN查询
+////10 彩铃天地
+////11 我的移动
+////12附近营业厅
+////13 自定义
+//#pragma mark - homeiconview delegate
+////9宫格按钮事件
+//- (void)HomeIconViewClicked:(int)index
+//{
+//    isFromLogin = NO;
+//    [self performSelector:@selector(goToViewController:) withObject:[NSNumber numberWithInt:index] afterDelay:.1f];
+//}
+//
+//- (void)goToViewController:(NSNumber *)numIndex
+//{
+//    UserInfo *userInfo = [UserInfoContext sharedUserInfoContext].userInfo;
+//    int index = [numIndex intValue];
+//    switch (index)
+//    {
+//        case 1:
+//        {
+//            if (userInfo.isLogin)
+//            {
+//                if (userInfo.hasLoginPwd)
+//                {
+//                    BisDealViewController *btViewController = [[BisDealViewController alloc] init];
+//                    [btViewController setHidesBottomBarWhenPushed:YES];
+//                    if(isFromLogin)
+//                    {
+//                        btViewController.isAnimation = NO;
+//                    }
+//                    [self.navigationController pushViewController:btViewController animated:YES];
+//                    
+//                    [btViewController release], btViewController = nil;
+//                }
+//                else if(userInfo.hasSendSMS)
+//                {
+//                    CheckPwdViewController *checkPwdView = [[CheckPwdViewController alloc]init];
+//                    checkPwdView.delegate = self;
+//                    checkPwdView.index = 1;
+//                    checkPwdView.showLbMsg = YES;
+//                    [self presentModalViewController:checkPwdView animated:NO];
+//                    [checkPwdView release];
+//                    /*
+//                     NSString *tempAnswer = [ModalAlert ask:@"请输入服务密码" withTextPrompt:@""];
+//                     
+//                     if (tempAnswer){//用户点击了确认按钮
+//                     if (tempAnswer.length != 6)
+//                     {
+//                     [Utilities MsgBox:@"请输入6位服务密码"];
+//                     }
+//                     else
+//                     {
+//                     [self performSelector:@selector(checkLoginPwd:) withObject:tempAnswer afterDelay:0.5];
+//                     }
+//                     }
+//                     */
+//                }
+//                else{}
+//            }
+//            else
+//            {
+//                CheckPwdViewController *checkPwdView = [[CheckPwdViewController alloc]init];
+//                checkPwdView.delegate = self;
+//                checkPwdView.index = 1;
+//                checkPwdView.showLbMsg = NO;
+//                [self presentModalViewController:checkPwdView animated:NO];
+//                [checkPwdView release];
+//            }
+//        }
+//        break;
+//        case 2:
+//        {
+//            HotPhoneController *hotPhoneController = [[HotPhoneController alloc] init];
+//            [hotPhoneController setHidesBottomBarWhenPushed:YES];
+//            if(isFromLogin)
+//            {
+//                hotPhoneController.isAnimation = NO;
+//            }
+//            [self.navigationController pushViewController:hotPhoneController animated:YES];
+//            
+//            [hotPhoneController release];
+//            break;
+//        }
+//        case 3:
+//        {
+//            [[self getCustomTabBarController] selectIndex:2];
+//        }
+//        break;
+//        case 4:
+//        {
+//            HotPushForMonthView *hotPushController = [[HotPushForMonthView alloc] init];
+//            [hotPushController setHidesBottomBarWhenPushed:YES];
+//            if(isFromLogin)
+//            {
+//                hotPushController.isAnimation = NO;
+//            }
+//            [self.navigationController pushViewController:hotPushController animated:YES];
+//            
+//            [hotPushController release];
+//        }
+//        break;
+//        case 5:
+//        {
+//            if (userInfo.isLogin)
+//            {
+//                OpenedServicesViewController *openedSVC = [[OpenedServicesViewController alloc]init];
+//                [openedSVC setHidesBottomBarWhenPushed:YES];
+//                if(isFromLogin)
+//                {
+//                    openedSVC.isAnimation = NO;
+//                }
+//                [self.navigationController pushViewController:openedSVC animated:YES];
+//                
+//                [openedSVC release];openedSVC = nil;
+//            }
+//            else
+//            {
+//                LoginViewController *controller = [[LoginViewController alloc] init];
+//                controller.delegate = self;
+//                controller.index = 5;
+//                [self presentModalViewController:controller animated:NO];
+//                [controller release];
+//            }
+//            
+//        }
+//        break;
+//        case 6:
+//        {
+//            if (userInfo.isLogin)
+//            {
+//                BillQueryViewController *controller = [[BillQueryViewController alloc] init];
+//                [controller setHidesBottomBarWhenPushed:YES];
+//                if(isFromLogin)
+//                {
+//                    controller.isAnimation = NO;
+//                }
+//                [self.navigationController pushViewController:controller animated:YES];
+//                
+//                [controller release];
+//            }
+//            else
+//            {
+//                LoginViewController *controller = [[LoginViewController alloc] init];
+//                controller.delegate = self;
+//                controller.index = 6;
+//                [self presentModalViewController:controller animated:NO];
+//                [controller release];
+//            }
+//        }
+//        break;
+//        case 7:
+//        {
+//            if (userInfo.isLogin)
+//            {
+//                llcxViewController *controller = [[llcxViewController alloc] init];
+//                [controller setHidesBottomBarWhenPushed:YES];
+//                if(isFromLogin)
+//                {
+//                    controller.isAnimation = NO;
+//                }
+//                [self.navigationController pushViewController:controller animated:YES];
+//                
+//                [controller release];
+//            }
+//            else
+//            {
+//                LoginViewController *controller = [[LoginViewController alloc] init];
+//                controller.delegate = self;
+//                controller.index = 7;
+//                [self presentModalViewController:controller animated:NO];
+//                [controller release];
+//            }
+//        }
+//        break;
+//        case 8:
+//        {
+//            if (userInfo.isLogin)
+//            {
+//                PackageMarginView *packageController = [[PackageMarginView alloc] init];
+//                [packageController setHidesBottomBarWhenPushed:YES];
+//                if(isFromLogin)
+//                {
+//                    packageController.isAnimation = NO;
+//                }
+//                [self.navigationController pushViewController:packageController animated:YES];
+//                
+//                [packageController release];
+//            }
+//            else
+//            {
+//                LoginViewController *controller = [[LoginViewController alloc] init];
+//                controller.delegate = self;
+//                controller.index = 8;
+//                [self presentModalViewController:controller animated:NO];
+//                [controller release];
+//            }
+//        }
+//        break;
+//        case 9:
+//        {
+//            WLanSearchViewController *wSVC = [[WLanSearchViewController alloc] init];
+//            wSVC.requestIndex = 0;
+//            wSVC.title = @"WLAN热点查询";
+//            [wSVC setHidesBottomBarWhenPushed:YES];
+//            if(isFromLogin)
+//            {
+//                wSVC.isAnimation = NO;
+//            }
+//            [self.navigationController pushViewController:wSVC animated:YES];
+//            
+//            [wSVC requestCity];
+//            [wSVC release];
+//        }
+//        break;
+//        case 10:
+//        {
+//            newRingViewController *ringController = [[newRingViewController alloc] initWithTag:1];
+//            [ringController setHidesBottomBarWhenPushed:YES];
+//            if(isFromLogin)
+//            {
+//                ringController.isAnimation = NO;
+//            }
+//            [self.navigationController pushViewController:ringController animated:YES];
+//            
+//            [ringController release];
+//        }
+//        break;
+//        case 11:
+//        {
+//            [[self getCustomTabBarController] selectIndex:3];
+//        }
+//        break;
+//        case 12:
+//        {
+//            MapViewController *mapView = [[MapViewController alloc]init];
+//            mapView.hidesBottomBarWhenPushed = YES;
+//            if(isFromLogin)
+//            {
+//                mapView.isAnimation = NO;
+//            }
+//            [self.navigationController pushViewController:mapView animated:YES];
+//            [mapView release];
+//        }
+//        break;
+//        case 13:
+//        {
+//            OnlineRootControll *onlineControll = [[OnlineRootControll alloc] init];
+//            [onlineControll setHidesBottomBarWhenPushed:YES];
+//            
+//            if(isFromLogin)
+//            {
+//                onlineControll.isAnimation = NO;
+//            }
+//            
+//            [self.navigationController pushViewController:onlineControll animated:YES];
+//            
+//            [onlineControll release], onlineControll = nil;
+//        }
+//        break;
+//        case 14:
+//        {
+//            CustomMenuViewController *controller = [[CustomMenuViewController alloc] init];
+//            [controller setHidesBottomBarWhenPushed:YES];
+//            if(isFromLogin)
+//            {
+//                controller.isAnimation = NO;
+//            }
+//            [self.navigationController pushViewController:controller animated:YES];
+//            
+//            [controller release], controller = nil;
+//        }
+//        break;
+//        case 16:
+//        {
+//			newShareViewConroller *shareV = [[newShareViewConroller alloc]initWithSoftwareContent];
+//            shareV.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:shareV animated:YES];
+//            [shareV release];
+//        }
+//        break;
+//        case 17:
+//        {
+//            [[self getCustomTabBarController] selectIndex:1];
+//        }
+//        break;
+//    }
+//}
+//
+//#pragma mark - load icon.plist
+//- (void)reloadIconPlist
+//{
+//    //释放原有的对象
+//    if (arrHomeSelectIcon.count) {
+//        [arrHomeSelectIcon removeAllObjects];
+//    }
+//    
+//    //重新载入
+//    NSString *plistPath = [Utilities documentsPath:kCustomMenuPlist];
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+//    {
+//        NSArray *array = [[NSArray alloc] initWithContentsOfFile:plistPath];
+//        for (int i=0; i<array.count; i++) //最后+icon计算
+//        {
+//            NSDictionary *dic = [array objectAtIndex:i];
+//            if ([[dic objectForKey:@"select"] boolValue])
+//            {
+//                [arrHomeSelectIcon addObject:dic];
+//            }
+//        }
+//        [array release];
+//    }
+//}
+///*
+// #pragma mark - http fee & gprs
+// - (void)resetHttpTemplateFeeGprs
+// {
+// if (httpFeeGprs) {
+// httpFeeGprs.requestDelegate = nil;
+// [httpFeeGprs release];
+// httpFeeGprs = nil;
+// }
+// }
+// 
+// - (void)httpFeeGprsFailed:(id)value
+// {
+// [self resetHttpTemplateFeeGprs];
+// }
+// 
+// - (void)httFeepGprsSuccess:(NSData *)data
+// {
+// [self resetHttpTemplateFeeGprs];
+// 
+// if (!data) {
+// return;
+// }
+// 
+// //判断成功的标志
+// NSString *strResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+// NSLog(@"%@",strResult);
+// 
+// //gprs
+// NSDictionary *dicGprs = [[strResult JSONValue] objectForKey:@"queryGprs_node"];
+// if (nil != dicGprs)
+// {
+// NSNumber *numberResult = [dicGprs objectForKey:@"resultCode"];
+// 
+// //判断成功的标志
+// if (1 == [numberResult intValue])
+// {
+// UserInfo *userInfo = [UserInfoContext sharedUserInfoContext].userInfo;
+// userInfo.resultCode = numberResult;
+// 
+// NSDictionary *dicObj = [dicGprs objectForKey:@"resultObj"];
+// if (dicObj != nil)
+// {
+// NSString *isUnlimitedBandwidth = [dicObj objectForKey:@"isUnlimitedBandwidth"];
+// //20元
+// if ([isUnlimitedBandwidth isEqualToString:@"1"]) {
+// userInfo.useFlux = [dicObj objectForKey:@"useFlux"];
+// }
+// else
+// {
+// NSDictionary *dicFlow = [dicObj objectForKey:@"packageFlow"];
+// if (dicFlow != nil)
+// {
+// userInfo.usedFlow = [dicFlow objectForKey:@"usedFlow"];
+// userInfo.totalFlow = [dicFlow objectForKey:@"totalFlow"];
+// }
+// }
+// userInfo.isUnlimitedBandwidth = isUnlimitedBandwidth;
+// userInfo.isPlayAt = [dicObj objectForKey:@"isPlayAt"];
+// [homeAdView refreshFlow];
+// }
+// }
+// }
+// 
+// //fee
+// NSDictionary *dicConsumeLogic = [[strResult JSONValue] objectForKey:@"myConsumeLogic_node"];
+// NSNumber *numberResult = [dicConsumeLogic objectForKey:@"resultCode"];
+// 
+// //判断登录成功的标志
+// if (1 == [numberResult intValue])
+// {
+// UserInfo *userInfo = [UserInfoContext sharedUserInfoContext].userInfo;
+// userInfo.resultCode = numberResult;
+// 
+// NSDictionary *dicObj = [dicConsumeLogic objectForKey:@"resultObj"];
+// if (dicObj)
+// {
+// NSArray *arrList = [dicObj objectForKey:@"consumeList"];
+// for (int i=0; i<[arrList count]; i++)
+// {
+// NSDictionary *dicList = [arrList objectAtIndex:i];
+// if (dicList) {
+// NSString *consumeType = [dicList objectForKey:@"consumeType"];
+// if ([consumeType isEqualToString:@"2"])
+// {
+// float consume = [[dicList objectForKey:@"consumeValue"] floatValue];
+// userInfo.curMonthFee = [NSString stringWithFormat:@"%.2f", consume/100];
+// [homeAdView refreshPersonInfo];
+// }
+// }
+// }
+// }
+// 
+// }
+// 
+// [strResult release];
+// }
+// 
+// //查询流量
+// - (void)queryFeeGprs
+// {
+// NSMutableData *postBody = [NSMutableData data];
+// [postBody appendData:[Interface_query_TotalInfo_Gprs dataUsingEncoding:NSUTF8StringEncoding]];
+// 
+// [self resetHttpTemplateFeeGprs];
+// httpFeeGprs = [[HttpTemplate alloc] init];
+// httpFeeGprs.failSelector = @selector(httpFeeGprsFailed:);
+// httpFeeGprs.sucessSelector = @selector(httFeepGprsSuccess:);
+// httpFeeGprs.requestDelegate = self;
+// [httpFeeGprs sendAsynRequest:[Constant wyServerUrl] content:postBody];
+// }*/
+//
+//#pragma mark - http act
+///*- (void)resetHttpTemplateAct
+// {
+// if (httpTemplateAct) {
+// httpTemplateAct.requestDelegate = nil;
+// [httpTemplateAct release];
+// httpTemplateAct = nil;
+// }
+// }
+// 
+// //过渡弹窗营销语
+// - (void)sendSimpleQueryRequest
+// {
+// NSString *req = Interface_simpleQuery_queryActForAndroid;
+// NSMutableData *postBody = [NSMutableData data];
+// [postBody appendData:[req dataUsingEncoding:NSUTF8StringEncoding]];
+// 
+// [self resetHttpTemplateAct];
+// httpTemplateAct = [[HttpTemplate alloc]init];
+// httpTemplateAct.failSelector = @selector(querySimpleQueryFailed:);
+// httpTemplateAct.sucessSelector = @selector(querySimpleQuerySuccessed:);
+// httpTemplateAct.requestDelegate = self;
+// [httpTemplateAct sendAsynRequest: [Constant wyServerUrl] content:postBody];
+// }
+// 
+// //过渡弹窗营销语-失败
+// -(void) querySimpleQueryFailed:(id)value
+// {
+// [self resetHttpTemplateAct];
+// }
+// 
+// //过渡弹窗营销语-成功
+// -(void) querySimpleQuerySuccessed:(id)value
+// {
+// [self resetHttpTemplateAct];
+// 
+// NSData *data = (NSData*)value;
+// NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+// NSDictionary *resultDict = [[result JSONValue] objectForKey:@"sq_node"];
+// [result release];
+// 
+// if ([[resultDict objectForKey:@"resultCode"] intValue] == 1)
+// {
+// NSArray *resultObj = [resultDict objectForKey:@"resultObj"];
+// NSLog(@"resultObj:%@", resultObj);
+// 
+// // 创建本地Plist文件实现缓存
+// NSString *plistPath = [Utilities documentsPath:@"simpleQuery.plist"];
+// // 文件不存在，创建之
+// if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+// [[NSFileManager defaultManager] createFileAtPath:plistPath contents:nil attributes:nil];
+// 
+// if ([resultObj count] > 0)
+// {
+// NSDictionary *dic = [NSDictionary dictionaryWithObject:resultObj forKey:@"simpleQuery"];
+// if ([dic writeToFile:plistPath atomically:YES])
+// NSLog(@"save dic to simpleQuery.plist  success !");
+// }
+// }
+// [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:KisQueryAct];
+// [[NSUserDefaults standardUserDefaults] synchronize];
+// }*/
+//
+//#pragma mark - http query welcome
+////更换欢迎页
+//- (void)resetHttpTemplateWelcome
+//{
+//    if (httpTemplateWelcome) {
+//        httpTemplateWelcome.requestDelegate = nil;
+//        [httpTemplateWelcome release];
+//        httpTemplateWelcome = nil;
+//    }
+//}
+//
+//- (void)sendQueryWelcome
+//{
+//    NSString *req = Interface_queryWelcome;
+//    NSMutableData *postBody = [NSMutableData data];
+//    [postBody appendData:[req dataUsingEncoding:NSUTF8StringEncoding]];
+//    
+//    [self resetHttpTemplateWelcome];
+//    httpTemplateWelcome = [[HttpTemplate alloc]init];
+//    httpTemplateWelcome.failSelector = @selector(QueryWelcomeFailed:);
+//    httpTemplateWelcome.sucessSelector = @selector(QueryWelcomeSuccessed:);
+//    httpTemplateWelcome.requestDelegate = self;
+//    [httpTemplateWelcome sendAsynRequest: [Constant wyServerUrl] content:postBody];
+//}
+//
+//- (void)QueryWelcomeFailed:(id)value
+//{
+//    [self resetHttpTemplateWelcome];
+//    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:KUD_queryWelcome];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:KWelcomeImageload];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//
+//- (void)QueryWelcomeSuccessed:(id)value
+//{
+//    [self resetHttpTemplateWelcome];
+//    
+//    int i=0;
+//    
+//	NSData *data = (NSData*)value;
+//	NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    NSDictionary *resultDict = [[result JSONValue] objectForKey:@"simpleQuery_node"];
+//    [result release];
+//    
+//    if (1 == [[resultDict objectForKey:@"resultCode"] intValue])
+//    {
+//        NSDictionary *resultObj= [resultDict objectForKey:@"resultObj"];
+//        NSString *strImage = [resultObj objectForKey:@"image"];
+//        if (nil != strImage && [strImage length] > 0)
+//        {
+//            i = 1;
+//            [NSThread detachNewThreadSelector:@selector(downloadImagesWelcome:)
+//            toTarget:self
+//            withObject:strImage];
+//        }
+//    }
+//    else
+//    {
+//        i = 0;
+//    }
+//    
+//    [[NSUserDefaults standardUserDefaults] setInteger:i forKey:KUD_queryWelcome];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:KWelcomeImageload];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//
+//- (void)downloadImagesWelcome:(id)strPath
+//{
+//    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+//    
+//    if (!strPath || [strPath length] == 0) {
+//        return;
+//    }
+//    
+//    NSString *strFile = [Utilities documentsPath:@"welcome.png"];
+//    //    if (![[NSFileManager defaultManager] fileExistsAtPath:strFile])
+//    {
+//        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:strPath]]; //确保覆盖，以便最新
+//        [data writeToFile:strFile atomically:YES];
+//    }
+//    
+//    [pool release];
+//}
+//
+//#pragma mark 精确营销和活动合并接口
+//- (void)resetHttpTemplateJoinAndPrecision
+//{
+//    if (httpTemplateJoinAndPrecision) {
+//        httpTemplateJoinAndPrecision.requestDelegate = nil;
+//        [httpTemplateJoinAndPrecision release];
+//        httpTemplateJoinAndPrecision = nil;
+//    }
+//}
+//
+////请求精确营销接口和活动合并接口
+//-(void)queryJoinAndPrecision
+//{
+//    NSString *queryStr = Interface_PrecisionAndJoin;
+//    NSMutableData *postBody = [NSMutableData data];
+//    [postBody appendData:[queryStr dataUsingEncoding:NSUTF8StringEncoding]];
+//    [self resetHttpTemplateJoinAndPrecision];
+//    httpTemplateJoinAndPrecision = [[HttpTemplate alloc] init];
+//    httpTemplateJoinAndPrecision.sucessSelector = @selector(queryJoinAndPrecisionDidSuccess:);
+//    httpTemplateJoinAndPrecision.failSelector = @selector(queryJoinAndPrecisionDidFailed:);
+//    httpTemplateJoinAndPrecision.requestDelegate = self;
+//    [httpTemplateJoinAndPrecision sendAsynRequest: [Constant wyServerUrl] content:postBody];
+//}
+//
+//-(void)queryJoinAndPrecisionDidSuccess:(id)value
+//{
+//    [self resetHttpTemplateJoinAndPrecision];
+//    
+//    //data
+//    NSString *result = [[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding];
+//	NSDictionary *jsonValue = [result JSONValue];
+//    [result release];
+//    
+//    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:KPrecisionAndJionInterface];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    NSDictionary *resultDic = [jsonValue objectForKey:@"home_node"];
+//    int resultCode = [[resultDic valueForKey:@"resultCode"] intValue];
+//    if (resultCode <= 0) {
+//        //失败
+//        NSString *errorMessage = [resultDic valueForKey:@"errorMessage"];
+//        [Utilities MsgBox:errorMessage];
+//    }else{
+//        
+//        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:KPrecisionAndJionInterface];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        
+//        NSDictionary *resultObj = [resultDic valueForKey:@"resultObj"];
+//        
+//        if (nil != resultObj && ![resultObj isEqual:[NSNull null]]) {
+//            //精确营销数据
+//            
+//            NSArray *precisionsArr = [resultObj objectForKey:@"precisions"];
+//            if (precisionsArr && ![precisionsArr isEqual:[NSNull null]]) {
+//                [[NSUserDefaults standardUserDefaults] setObject:precisionsArr forKey:@"precisionArray"];
+//            }
+//            
+//            
+//            //活动数据
+//            
+//            NSDictionary *activitiesDict = [resultObj objectForKey:@"activities"];
+//            if (activitiesDict && ![activitiesDict isKindOfClass:[NSNull class]] )
+//            {
+//                NSString *successMsg = [resultObj valueForKey:@"successMsg"];
+//                if(successMsg && [successMsg length] > 0/* && !joinFlag*/)
+//                {
+//                    //   joinFlag = YES;
+//                    self.joinUrl = [resultObj valueForKey:@"url"];
+//                    NSArray *titles = [NSArray arrayWithObjects:@"取消",@"确定",nil];
+//                    BaseAlertView *alert = [[BaseAlertView alloc]initWithTitle:@"温馨提示" message:successMsg scrollViewBtns:nil delegate:self buttonTitles:titles];
+//                    alert.tag = 20130422;
+//                    [alert show];
+//                    [alert release];
+//                    
+//                }
+//                else
+//                {
+//                    NSString *errorMessage = [resultDic valueForKey:@"errorMessage"];
+//                    NSString *isShowErrorMsg = [resultObj valueForKey:@"isShowErrorMsg"];
+//                    if([isShowErrorMsg intValue] == 1 && errorMessage && [errorMessage length] > 0)
+//                    {
+//                        [Utilities MsgBox:errorMessage];
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    
+//}
+//
+//-(void)queryJoinAndPrecisionDidFailed:(id)error
+//{
+//    [self resetHttpTemplateJoinAndPrecision];
+//    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:KPrecisionAndJionInterface];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//
+//#pragma mark - http join
+//
+//- (void)resetHttpTemplateJoin
+//{
+//    if (httpTemplateJoin) {
+//        httpTemplateJoin.requestDelegate = nil;
+//        [httpTemplateJoin release];
+//        httpTemplateJoin = nil;
+//    }
+//}
+//
+////请求营销活动
+//- (void) requestJoin
+//{
+//    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+//    NSString *str = Interface_join;
+//    NSMutableData *postBody = [NSMutableData data];
+//    [postBody appendData:[str dataUsingEncoding:NSUTF8StringEncoding]];
+//    
+//    [self resetHttpTemplateJoin];
+//	httpTemplateJoin = [[HttpTemplate alloc]init];
+//	httpTemplateJoin.failSelector = @selector(joinFailed:);
+//	httpTemplateJoin.sucessSelector = @selector(joinSuccess:);
+//	httpTemplateJoin.requestDelegate = self;
+//	[httpTemplateJoin sendAsynRequest: [Constant wyServerUrl] content:postBody];
+//	[pool release];
+//}
+//
+//- (void) joinSuccess:(id)value
+//{
+//    [self resetHttpTemplateJoin];
+//    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:KJoinInterface];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    NSString *result = [[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding];
+//	//NSLog(@"result=%@",result);
+//	NSDictionary *jsonValue = [result JSONValue];
+//    [result release];
+//    
+//    NSDictionary *resultDic = [jsonValue objectForKey:@"activity_node"];
+//    int resultCode = [[resultDic valueForKey:@"resultCode"] intValue];
+//    NSDictionary *resultObj = [resultDic valueForKey:@"resultObj"];
+//    
+//    if (resultObj && ![resultObj isKindOfClass:[NSNull class]] )
+//    {
+//        if(resultCode >= 1)
+//        {
+//            NSString *successMsg = [resultObj valueForKey:@"successMsg"];
+//            if(successMsg && [successMsg length] > 0/* && !joinFlag*/)
+//            {
+//                //   joinFlag = YES;
+//                self.joinUrl = [resultObj valueForKey:@"url"];
+//                NSArray *titles = [NSArray arrayWithObjects:@"取消",@"确定",nil];
+//                BaseAlertView *alert = [[BaseAlertView alloc]initWithTitle:@"温馨提示" message:successMsg scrollViewBtns:nil delegate:self buttonTitles:titles];
+//                alert.tag = 20130422;
+//                [alert show];
+//                [alert release];
+//                
+//            }
+//        }
+//        else
+//        {
+//            NSString *errorMessage = [resultDic valueForKey:@"errorMessage"];
+//            NSString *isShowErrorMsg = [resultObj valueForKey:@"isShowErrorMsg"];
+//            if([isShowErrorMsg intValue] == 1 && errorMessage && [errorMessage length] > 0)
+//            {
+//                [Utilities MsgBox:errorMessage];
+//            }
+//        }
+//    }
+//}
+//
+//- (void) joinFailed:(id)value
+//{
+//    [self resetHttpTemplateJoin];
+//    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:KJoinInterface];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//#pragma mark - http 弹出框信息，流量使用情况，当月消费，用户信息 ，欢迎页，
+//- (void) requestUserInfo
+//{
+//    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+//    NSString *str = Interface_userInfo(@"",@"");
+//    NSMutableData *postBody = [NSMutableData data];
+//    [postBody appendData:[str dataUsingEncoding:NSUTF8StringEncoding]];
+//    
+//    [self resetUserHttp];
+//	userHttp = [[HttpTemplate alloc]init];
+//	userHttp.failSelector = @selector(userInfoFailed:);
+//	userHttp.sucessSelector = @selector(userInfoSuccess:);
+//	userHttp.requestDelegate = self;
+//	[userHttp sendAsynRequest: [Constant wyServerUrl] content:postBody];
+//	[pool release];
+//}
+//
+//- (void) userInfoFailed:(id)value
+//{
+//    [self resetUserHttp];
+//    
+//    /*   [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:KUD_queryWelcome];
+//     [[NSUserDefaults standardUserDefaults] synchronize];
+//     
+//     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:KWelcomeImageload];
+//     [[NSUserDefaults standardUserDefaults] synchronize];*/
+//    
+//    [tableViewMain tableViewDidFinishedLoadingSuccess:NO withMessage:@""];
+//}
+//
+//- (void) userInfoSuccess:(id)value
+//{
+//    [self resetUserHttp];
+//    
+//    NSString *result = [[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding];
+//	//NSLog(@"result=%@",result);
+//	NSDictionary *jsonValue = [result JSONValue];
+//    [result release];
+//    
+//    NSDictionary *resultDic = [jsonValue objectForKey:@"home_node"];
+//    NSNumber * resultCode = [resultDic valueForKey:@"resultCode"];
+//    
+//    if([resultCode intValue] == 1)
+//    {
+//        UserInfo *userInfo = [UserInfoContext sharedUserInfoContext].userInfo;
+//        userInfo.resultCode = resultCode;
+//        
+//        NSDictionary *dicObj = [resultDic objectForKey:@"resultObj"];
+//        if (dicObj != nil && ![dicObj isEqual:[NSNull null]])
+//        {
+//            if([UserInfoContext sharedUserInfoContext].userInfo.isLogin)
+//            {
+//                //流量
+//                NSDictionary *gprsDic = [dicObj objectForKey:@"gprs"];
+//                if(gprsDic && ![gprsDic isEqual:[NSNull null]])
+//                {
+//                    NSString *isUnlimitedBandwidth = [gprsDic objectForKey:@"isUnlimitedBandwidth"];
+//                    if(isUnlimitedBandwidth && ![isUnlimitedBandwidth isEqual:[NSNull null]])
+//                    {
+//                        //20元
+//                        if ([isUnlimitedBandwidth isEqualToString:@"1"]) {
+//                            NSString *useFlux = [gprsDic objectForKey:@"useFlux"];
+//                            if(useFlux && ![useFlux isEqual:[NSNull null]])
+//                            {
+//                                userInfo.useFlux = useFlux;
+//                            }
+//                        }
+//                        else
+//                        {
+//                            NSDictionary *dicFlow = [gprsDic objectForKey:@"packageFlow"];
+//                            if(dicFlow && ![dicFlow isEqual:[NSNull null]])
+//                            {
+//                                NSString *usedFlow = [dicFlow objectForKey:@"usedFlow"];
+//                                if(usedFlow && ![usedFlow isEqual:[NSNull null]])
+//                                {
+//                                    userInfo.usedFlow = [dicFlow objectForKey:@"usedFlow"];
+//                                }
+//                                NSString *totalFlow = [dicFlow objectForKey:@"totalFlow"];
+//                                if(totalFlow && ![totalFlow isEqual:[NSNull null]])
+//                                {
+//                                    userInfo.totalFlow = [dicFlow objectForKey:@"totalFlow"];
+//                                }
+//                                
+//                            }
+//                        }
+//                        userInfo.isUnlimitedBandwidth = isUnlimitedBandwidth;
+//                        NSString *isPlayAt = [gprsDic objectForKey:@"isPlayAt"];
+//                        if(isPlayAt && ![isPlayAt isEqual:[NSNull null]])
+//                        {
+//                            userInfo.isPlayAt = [gprsDic objectForKey:@"isPlayAt"];
+//                        }
+//                        [homeAdView refreshFlow];
+//                    }
+//                }
+//                
+//                
+//                //余额
+//                NSDictionary *userInfoDic = [dicObj objectForKey:@"userInfo"];
+//                if (userInfoDic && ![userInfoDic isEqual:[NSNull null]])
+//                {
+//                    UserInfo *userInfo = [UserInfoContext sharedUserInfoContext].userInfo;
+//                    NSString *balance = [userInfoDic objectForKey:@"bal"];
+//                    if(balance && ![balance isEqual:[NSNull null]])
+//                    {
+//                        userInfo.balance = [userInfoDic objectForKey:@"bal"];
+//                    }
+//                    
+//                    NSString *score = [userInfoDic objectForKey:@"sc"];
+//                    if(score && ![score isEqual:[NSNull null]])
+//                    {
+//                        userInfo.score = [userInfoDic objectForKey:@"sc"];
+//                    }
+//                    
+//                    NSString *mpoint = [userInfoDic objectForKey:@"mp"];
+//                    if(mpoint && ![mpoint isEqual:[NSNull null]])
+//                    {
+//                        userInfo.mpoint = [userInfoDic objectForKey:@"mp"];
+//                    }
+//                    
+//                    NSString *userAreaNum = [userInfoDic objectForKey:@"uan"];
+//                    if(userAreaNum && ![userAreaNum isEqual:[NSNull null]])
+//                    {
+//                        userInfo.userAreaNum = [userInfoDic objectForKey:@"uan"];
+//                    }
+//                    
+//                    NSString *brandJbNumName = [userInfoDic objectForKey:@"bjnn"];
+//                    if(brandJbNumName && ![brandJbNumName isEqual:[NSNull null]])
+//                    {
+//                        userInfo.brandJbNumName = [userInfoDic objectForKey:@"bjnn"];
+//                    }
+//                }
+//                
+//                //当月消费
+//                NSString *myConsumes = [dicObj objectForKey:@"myConsumes"];
+//                if (myConsumes != nil && ![myConsumes isEqual:[NSNull null]])
+//                {
+//                    float consume = [myConsumes floatValue];
+//                    userInfo.curMonthFee = [NSString stringWithFormat:@"%.2f", consume/100];
+//                    [homeAdView refreshPersonInfo];
+//                }
+//            }
+//            
+//            /*
+//             NSString *plistPath = [Utilities documentsPath:@"simpleQuery.plist"];
+//             if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])//不存在
+//             {
+//             [[NSFileManager defaultManager] createFileAtPath:plistPath contents:nil attributes:nil];
+//             //弹出框信息
+//             NSArray *actForAndroidDic = [dicObj objectForKey:@"actForAndroid"];
+//             if(actForAndroidDic && ![actForAndroidDic isEqual:[NSNull null]])
+//             {
+//             if ([actForAndroidDic count] > 0)
+//             {
+//             NSDictionary *dic = [NSDictionary dictionaryWithObject:actForAndroidDic forKey:@"simpleQuery"];
+//             if ([dic writeToFile:plistPath atomically:YES])
+//             NSLog(@"save dic to simpleQuery.plist  success !");
+//             }
+//             }
+//             }
+//             
+//             */
+//            //弹出框信息
+//            NSString *plistPath = [Utilities documentsPath:@"simpleQuery.plist"];
+//            if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])//不存在
+//            {
+//                [[NSFileManager defaultManager] createFileAtPath:plistPath contents:nil attributes:nil];
+//            }
+//            
+//            NSArray *actForAndroidDic = [dicObj objectForKey:@"actForAndroid"];
+//            if(actForAndroidDic && ![actForAndroidDic isEqual:[NSNull null]])
+//            {
+//                if ([actForAndroidDic count] > 0)
+//                {
+//                    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+//                    NSArray *array = [dic objectForKey:@"simpleQuery"];
+//                    if(array == nil)
+//                    {
+//                        NSDictionary *dic = [NSDictionary dictionaryWithObject:actForAndroidDic forKey:@"simpleQuery"];
+//                        if ([dic writeToFile:plistPath atomically:YES])
+//                        NSLog(@"save dic to simpleQuery.plist  success !");
+//                    }
+//                }
+//            }
+//            
+//            
+//            
+//            //欢迎图片
+//            /*   int welcome = [[NSUserDefaults standardUserDefaults] integerForKey:KWelcomeImageload];
+//             if(welcome != 1)
+//             {
+//             int i = 0;
+//             NSDictionary *welcomePagesDIC = [dicObj objectForKey:@"welcomePages"];
+//             if(welcomePagesDIC)
+//             {
+//             NSString *strImage = [welcomePagesDIC objectForKey:@"image"];
+//             if (nil != strImage && [strImage length] > 0)
+//             {
+//             i = 1;
+//             [NSThread detachNewThreadSelector:@selector(downloadImagesWelcome:)
+//             toTarget:self
+//             withObject:strImage];
+//             }
+//             }
+//             [[NSUserDefaults standardUserDefaults] setInteger:i forKey:KUD_queryWelcome];
+//             [[NSUserDefaults standardUserDefaults] synchronize];
+//             
+//             [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:KWelcomeImageload];
+//             [[NSUserDefaults standardUserDefaults] synchronize];
+//             }*/
+//        }
+//        
+//    }
+//    [tableViewMain tableViewDidFinishedLoadingSuccess:YES withMessage:@""];
+//}
+//- (void)resetUserHttp
+//{
+//    if (userHttp) {
+//        userHttp.requestDelegate = nil;
+//        [userHttp release];
+//        userHttp = nil;
+//    }
+//}
+//#pragma mark - http 精确营销
+//
+//- (void)resetHttpTemplatePrecision
+//{
+//    if (httpTemplatePrecision) {
+//        httpTemplatePrecision.requestDelegate = nil;
+//        [httpTemplatePrecision release];
+//        httpTemplatePrecision = nil;
+//    }
+//}
+//
+////请求营销活动
+//- (void) requestPrecision
+//{
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"precisionArray"];
+//    
+//    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+//    NSString *str = Interface_precision;
+//    NSMutableData *postBody = [NSMutableData data];
+//    [postBody appendData:[str dataUsingEncoding:NSUTF8StringEncoding]];
+//    
+//    [self resetHttpTemplatePrecision];
+//	httpTemplatePrecision = [[HttpTemplate alloc]init];
+//	httpTemplatePrecision.failSelector = @selector(PrecisionFailed:);
+//	httpTemplatePrecision.sucessSelector = @selector(PrecisionSuccess:);
+//	httpTemplatePrecision.requestDelegate = self;
+//	[httpTemplatePrecision sendAsynRequest: [Constant wyServerUrl] content:postBody];
+//	[pool release];
+//}
+//
+//- (void) PrecisionSuccess:(id)value
+//{
+//    [self resetHttpTemplatePrecision];
+//    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:KPrecisionInterface];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    NSString *result = [[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding];
+//	//NSLog(@"result=%@",result);
+//	NSDictionary *jsonValue = [result JSONValue];
+//    [result release];
+//    
+//    NSDictionary *resultDic = [jsonValue objectForKey:@"pnode"];
+//    int resultCode = [[resultDic valueForKey:@"resultCode"] intValue];
+//    NSArray *resultObj = [resultDic valueForKey:@"resultObj"];
+//    
+//    if (resultCode == 1/* && !joinFlag*/)
+//    {
+//        //    joinFlag = YES;
+//        [[NSUserDefaults standardUserDefaults] setObject:resultObj forKey:@"precisionArray"];
+//        //   [self showPrecisionJoin];
+//    }
+//}
+//
+//- (void) PrecisionFailed:(id)value
+//{
+//    [self resetHttpTemplatePrecision];
+//    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:KPrecisionInterface];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//
+//- (void) showPrecisionJoin
+//{
+//    NSArray *precisionArray = [[[NSUserDefaults standardUserDefaults]objectForKey:@"precisionArray"] retain];
+//    
+//    if(precisionArray && [precisionArray count] > 0)
+//    {
+//        //        NSString *name = [[precisionArray objectAtIndex:0] valueForKey:@"name"];
+//        int j = 0;
+//        if (precisionArray.count > 1)
+//        {
+//            j = (int)(arc4random()%(precisionArray.count-1));
+//            NSLog(@"arc4random()precisionArray.count:-----%d",j);
+//        }
+//        
+//        NSString *pageName = [[precisionArray objectAtIndex:j] valueForKey:@"pageName"];
+//        self.joinUrl =[[precisionArray objectAtIndex:j] valueForKey:@"url"];
+//        
+//        NSArray *titles = [NSArray arrayWithObjects:@"取消",@"确定",nil];
+//        BaseAlertView *alert = [[BaseAlertView alloc]initWithTitle:@"温馨提示" message:pageName scrollViewBtns:nil delegate:self buttonTitles:titles];
+//        alert.tag = 20130423;
+//        [alert contextAligment:UITextAlignmentLeft];
+//        [alert show];
+//        [alert release];
+//        
+//        NSMutableArray *arr = [NSMutableArray arrayWithArray:precisionArray];
+//        [arr removeObjectAtIndex:j];
+//        
+//        NSMutableArray *array = nil;
+//        /*
+//         for (int i = 1; i < [precisionArray count]; i++) {
+//         [array  addObject:[precisionArray objectAtIndex:i]];
+//         }*/
+//        array = arr;
+//        [[NSUserDefaults standardUserDefaults]setObject:array forKey:@"precisionArray"];
+//    }
+//    
+//    [precisionArray release];
+//}
+//
+//#pragma mark - ad
+////图片加载完成后回调
+//-(void)callBack
+//{
+//	[homeAdView refreshScroll];//刷新
+//}
+//
+//- (void)downloadAdImages
+//{
+//    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+//    
+//    NSMutableArray *arrSource = [[NSMutableArray alloc] init];
+//	NSMutableArray *arrDest = [[NSMutableArray alloc] init];
+//    for (int i=0; i<[Constant guangGao].count; i++)
+//    {
+//        NSArray *arr = [[[[Constant guangGao] objectAtIndex:i] objectForKey:@"img"] componentsSeparatedByString:@"/"];
+//        NSLog(@"advert_:%@",arr);
+//        NSString *strFile = [NSString stringWithFormat:@"%@/%@_%d.png",
+//        [Utilities documentsPath:@"images"],[arr objectAtIndex:arr.count-2],
+//        [[[[Constant guangGao] objectAtIndex:i] objectForKey:@"id"] intValue]];
+//        
+//        if (![[NSFileManager defaultManager] fileExistsAtPath:strFile])
+//        {
+//            [arrSource addObject:[[[Constant guangGao] objectAtIndex:i] objectForKey:@"img"]];
+//            [arrDest addObject:strFile];
+//        }
+//    }
+//    //没有，下载
+//    if (arrSource.count > 0)
+//    {
+//        FileDownloadServices *downloadTools=[FileDownloadServices getInstance];
+//        downloadTools.serviceDelegate=self;
+//        [downloadTools downloadFiles:arrSource downloadTo:arrDest];
+//    }
+//    else //有了，刷新
+//    {
+//        [homeAdView refreshScroll];
+//    }
+//    [arrSource release];
+//    [arrDest release];
+//    
+//    
+//    [pool release];
+//}
+//
+//- (void)resetHttpTemplateAdvert
+//{
+//    if (httpTemplateAdvert) {
+//        httpTemplateAdvert.requestDelegate = nil;
+//        [httpTemplateAdvert release];
+//        httpTemplateAdvert = nil;
+//    }
+//}
+//
+////广告模块
+//- (void)sendQueryAdvertNew
+//{
+//    NSString *req = Interface_simpleQuery_queryAdvertNew;
+//    NSMutableData *postBody = [NSMutableData data];
+//    [postBody appendData:[req dataUsingEncoding:NSUTF8StringEncoding]];
+//    
+//    [self resetHttpTemplateAdvert];
+//    httpTemplateAdvert = [[HttpTemplate alloc]init];
+//    httpTemplateAdvert.failSelector = @selector(AdvertNewFailed:);
+//    httpTemplateAdvert.sucessSelector = @selector(AdvertNewSuccessed:);
+//    httpTemplateAdvert.requestDelegate = self;
+//    [httpTemplateAdvert sendAsynRequest: [Constant wyServerUrl] content:postBody];
+//}
+//
+////广告模块-失败
+//- (void)AdvertNewFailed:(id)value
+//{
+//    [self resetHttpTemplateAdvert];
+//}
+//
+////广告模块-成功
+//-(void)AdvertNewSuccessed:(id)value
+//{
+//    [self resetHttpTemplateAdvert];
+//    
+//	NSData *data = (NSData*)value;
+//	NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    if (nil == result) {
+//        return;
+//    }
+//    NSDictionary *resultDict = [[result JSONValue] objectForKey:@"simpleQuery_node"];
+//    [result release];
+//    
+//    if ([[resultDict objectForKey:@"resultCode"] intValue] == 1)
+//    {
+//        NSMutableArray *resultObj = [resultDict objectForKey:@"resultObj"];
+//        if (nil != resultObj && resultObj.count > 0) {
+//            [Constant setGuangGao:resultObj];
+//            [NSThread detachNewThreadSelector:@selector(downloadAdImages) toTarget:self withObject:nil];
+//        }
+//    }
+//}
+//
+//-(void) showStatusInfo:(BOOL)first withIsOpen:(BOOL)open
+//{
+//    if (first == YES && open == NO) {
+//        [Utilities lastUpdate:@"更新" withTimeDuration:1.0];
+//        isFirstIn = NO;
+//        isShow = YES;
+//    }
+//}
+//
+//#pragma mark - updateversion
+//- (void)UpdateDBSucess
+//{
+//	uv.requestDelegate = nil;
+//	[uv release];
+//	uv = nil;
+//    
+//    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:kUpdateVersion];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    [self showStatusInfo:isFirstIn withIsOpen:isShow];
+//}
+//
+//- (void)UpdateDBFail
+//{
+//	uv.requestDelegate = nil;
+//	[uv release];
+//	uv = nil;
+//    
+//    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kUpdateVersion];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//
+////更新版本信息
+//- (void)initUpdateDB
+//{
+//	if (uv)
+//	{
+//		uv.requestDelegate = nil;
+//		[uv release];
+//		uv = nil;
+//	}
+//	
+//	uv=[[UpdateVersion alloc]init];
+//	uv.requestDelegate = self;
+//	uv.sucessSelector = @selector(UpdateDBSucess);
+//	uv.failSelector = @selector(UpdateDBFail);
+//	[uv gainLastestVersion];
+//}
+//
+////TODO:下拉刷新仪表盘
+//#pragma mark getHomeAdData
+//-(void)getHomeAdData
+//{
+//    //登录状态变化
+//    UserInfo *userInfo = [UserInfoContext sharedUserInfoContext].userInfo;
+//    if (userInfo.isLogin)
+//    {
+//        homeAdView.isLogin = YES;
+//        //刷新面板
+//        [homeAdView refreshPersonInfo];
+//        
+//        ivIsLogin.image = [Utilities loadImageByName:@"home_login@2x.png"];
+//        NSString *strBand = [NSString stringWithFormat:@"尊敬的%@用户，欢迎您", userInfo.brandJbNumName];
+//        [leftButton setTitle:strBand forState:UIControlStateNormal];
+//        [arrowImageView stopAnimating];
+//        
+//        
+//        /*  hangqian,首页接口(Interface_userInfo)合并的时候注释的
+//         if (!userInfo.isUnlimitedBandwidth || !userInfo.curMonthFee) {
+//         
+//         [self queryFeeGprs];
+//         }
+//         else {
+//         [homeAdView refreshFlow];
+//         
+//         }*/
+//        //查询流量/请求当月消费/弹出框信息
+//        //        NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//        //        NSString *plistPath = [[documentDirectory stringByAppendingPathComponent:@"simpleQuery.plist"] retain];
+//        //
+//        //        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+//        //        [plistPath release];
+//        //        NSArray *array = [dic objectForKey:@"simpleQuery"];
+//        
+//        //        if (!userInfo.isUnlimitedBandwidth || !userInfo.curMonthFee || array == nil) {
+//        //重新获取用户个人网络数据
+//        [self requestUserInfo];
+//        //        }
+//        //        else {
+//        //            [homeAdView refreshFlow];
+//        //
+//        //            [tableViewMain tableViewDidFinishedLoadingWithMessage:@""];
+//        //        }
+//    }
+//    else
+//    {
+//        homeAdView.isLogin = NO;
+//        ivIsLogin.image = [Utilities loadImageByName:@"home_nologin@2x.png"];
+//        [leftButton setTitle:@"尊敬的用户欢迎您,请登录" forState:UIControlStateNormal];
+//        
+//        //箭头
+//        [arrowImageView startAnimating];
+//        
+//        [tableViewMain tableViewDidFinishedLoadingSuccess:YES withMessage:@""];
+//	}
+//}
+//
+//#pragma mark - view init
+//- (void)viewWillAppear:(BOOL)animated {
+//    
+//    [super viewWillAppear:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
+//    
+//    //保存devicetoken
+//    int deviceToken = [[NSUserDefaults standardUserDefaults] integerForKey:KDevictTokenSave];
+//    if(1 != deviceToken)
+//    {
+//        [[pushInterface sharedInstance] saveDeviceToken];
+//    }
+//    
+//    //登录状态变化
+//    UserInfo *userInfo = [UserInfoContext sharedUserInfoContext].userInfo;
+//    if (userInfo.isLogin)
+//    {
+//        homeAdView.isLogin = YES;
+//        //刷新面板
+//        [homeAdView refreshPersonInfo];
+//        
+//        ivIsLogin.image = [Utilities loadImageByName:@"home_login@2x.png"];
+//        NSString *strBand = [NSString stringWithFormat:@"尊敬的%@用户，欢迎您", userInfo.brandJbNumName];
+//        [leftButton setTitle:strBand forState:UIControlStateNormal];
+//        [arrowImageView stopAnimating];
+//        
+//        
+//        /*  hangqian,首页接口(Interface_userInfo)合并的时候注释的
+//         if (!userInfo.isUnlimitedBandwidth || !userInfo.curMonthFee) {
+//         
+//         [self queryFeeGprs];
+//         }
+//         else {
+//         [homeAdView refreshFlow];
+//         
+//         }*/
+//        //查询流量/请求当月消费/弹出框信息
+//        NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//        NSString *plistPath = [[documentDirectory stringByAppendingPathComponent:@"simpleQuery.plist"] retain];
+//        
+//        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+//        [plistPath release];
+//        NSArray *array = [dic objectForKey:@"simpleQuery"];
+//        
+//        if (!userInfo.isUnlimitedBandwidth || !userInfo.curMonthFee || array == nil) {
+//            
+//            [self requestUserInfo];
+//        }
+//        else {
+//            [homeAdView refreshFlow];
+//        }
+//        
+//        /*
+//         //精确营销
+//         int join = [[NSUserDefaults standardUserDefaults] integerForKey:KJoinInterface];
+//         if(1 != join)
+//         {
+//         [self requestJoin];
+//         }
+//         //营销
+//         int Precision = [[NSUserDefaults standardUserDefaults] integerForKey:KPrecisionInterface];
+//         if(1 != Precision)
+//         {
+//         [self requestPrecision];
+//         }
+//         */
+//        
+//        //请求精确营销和活动合并接口
+//        int precisionAndJion = [[NSUserDefaults standardUserDefaults] integerForKey:KPrecisionAndJionInterface];
+//        if (1 != precisionAndJion) {
+//            [self queryJoinAndPrecision];
+//        }
+//        
+//        //向服务器传devicetoken当登陆了，和手机号保存在一起得
+//        int deviceWithPhoneNum = [[NSUserDefaults standardUserDefaults] integerForKey:KLoginTime];
+//        if (1 != deviceWithPhoneNum) {
+//            [[pushInterface sharedInstance] saveLoginTime];
+//        }
+//    }
+//    else
+//    {
+//        homeAdView.isLogin = NO;
+//        ivIsLogin.image = [Utilities loadImageByName:@"home_nologin@2x.png"];
+//        [leftButton setTitle:@"尊敬的用户欢迎您,请登录" forState:UIControlStateNormal];
+//        
+//        //箭头
+//        [arrowImageView startAnimating];
+//        
+//        //弹出框信息
+//        NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//        NSString *plistPath = [[documentDirectory stringByAppendingPathComponent:@"simpleQuery.plist"] retain];
+//        
+//        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+//        [plistPath release];
+//        NSArray *array = [dic objectForKey:@"simpleQuery"];
+//        
+//        if (array == nil) {
+//            
+//            [self requestUserInfo];
+//        }
+//        
+//        //纪录devicetoken登出得时间
+//        int deviceWithPhoneNum = [[NSUserDefaults standardUserDefaults] integerForKey:KLoginOutTime];
+//        if (1 != deviceWithPhoneNum) {
+//            [[pushInterface sharedInstance] saveLoginoutTime];
+//        }
+//	}
+//    
+//    //重置个性化菜单
+//    if (homeIconView)
+//    {
+//        homeIconView.unreadHotPushCount = [UserInfoContext sharedUserInfoContext].userInfo.unReadHotPushCount;
+//        homeIconView.delegate = self;
+//        [self reloadIconPlist];
+//        homeIconView.arrIcons = arrHomeSelectIcon;
+//    }
+//    // hangqian,首页接口(Interface_userInfo)合并的时候注释的
+//    //过渡弹窗营销语，0值时再次请求
+//    /*    int isQueryAct = [[NSUserDefaults standardUserDefaults] integerForKey:KisQueryAct];
+//     if (0 == isQueryAct)
+//     {
+//     NSString *plistPath = [Utilities documentsPath:@"simpleQuery.plist"];
+//     if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])//不存在
+//     {
+//     [self sendSimpleQueryRequest];
+//     }
+//     }*/
+//    
+//    //请求广告
+//    if (0 == [[Constant guangGao] count]) //无广告时请求
+//	{
+//		[self sendQueryAdvertNew];
+//	}
+//    else
+//    {
+//        BOOL bGuangGao = NO;
+//        for (int i=0; i<[Constant guangGao].count; i++) //有广告时但无图片请求
+//        {
+//            NSArray *arr = [[[[Constant guangGao] objectAtIndex:i] objectForKey:@"img"] componentsSeparatedByString:@"/"];
+//            NSLog(@"advert_:%@",arr);
+//            NSString *strFile = [NSString stringWithFormat:@"%@/%@_%d.png",
+//            [Utilities documentsPath:@"images"],[arr objectAtIndex:arr.count-2],
+//            [[[[Constant guangGao] objectAtIndex:i] objectForKey:@"id"] intValue]];
+//            
+//            if (![[NSFileManager defaultManager] fileExistsAtPath:strFile])
+//            {
+//                bGuangGao = YES;
+//                break;
+//            }
+//        }
+//        if (bGuangGao)
+//        {
+//            [self sendQueryAdvertNew];
+//        }
+//    }
+//    
+//    //刷新表格，以防重置个性化菜单
+//    if (tableViewMain)
+//    {
+//        //重新进入界面，恢复可见
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//        [tableViewMain scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//        
+//        //重载所有内容
+//        [tableViewMain reloadData];
+//    }
+//    
+//    //更新数据库
+//    int updateVersion = [[NSUserDefaults standardUserDefaults] integerForKey:kUpdateVersion];
+//    if (1 != updateVersion) {
+//        [self initUpdateDB];
+//    }
+//    
+//    //上传数据统计量
+//    int uploadAction = [[NSUserDefaults standardUserDefaults] integerForKey:kUploadActionDispatcher];
+//    if (1 != uploadAction) {
+//        [[ActionDispatcherCollection sharedInstance] uploadActionDispatcher];
+//    }
+//    
+//    //更换欢迎页
+//    int welcome = [[NSUserDefaults standardUserDefaults] integerForKey:KWelcomeImageload];
+//    if(1 != welcome)
+//    {
+//        [self sendQueryWelcome];
+//    }
+//    
+//    if (isShow == NO && isFirstIn == NO) {
+//        isFirstIn = YES;
+//        [self showStatusInfo:isFirstIn withIsOpen:isShow];
+//    }
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    [super viewWillDisappear:animated];
+//    [self.navigationController setNavigationBarHidden:NO animated:animated];
+//    [homeAdView CancelTimer];
+//    [self resetUserHttp];
+//    //取消刷新动作
+//    [tableViewMain tableViewDidFinishedLoadingSuccess:NO withMessage:@""];
+//    //    [self resetHttpTemplateAct];
+//    [self resetHttpTemplateAdvert];
+//    //    [self resetHttpTemplateFeeGprs];
+//    [self resetHttpTemplateJoin];
+//    [self resetHttpTemplatePrecision];
+//    [self resetHttpTemplateJoinAndPrecision];
+//    //    [self resetHttpTemplateWelcome];
+//    [self resetHttpTemplateWelcome];
+//    [[pushInterface sharedInstance] resetHttpTemplate];
+//    [[pushInterface sharedInstance] resetSaveLoginTimeTemplate];
+//    [[pushInterface sharedInstance] resetSaveLoginOutTimeTemplate];
+//    /*
+//     if(loginConnection)
+//     {
+//     [self.loginConnection cancel];
+//     [loginConnection release];
+//     loginConnection = nil;
+//     }
+//     */
+//    
+//    if (isShow == NO) {
+//        isFirstIn = NO;
+//    }
+//}
+//
+//- (void)loadView
+//{
+//    [super loadView];
+//    
+//    if (ISIOS7) {
+//        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:20.0f],UITextAttributeFont,[UIColor whiteColor],UITextAttributeTextColor,nil];
+//        
+//        self.navigationController.navigationBar.titleTextAttributes = dict;
+//    }
+//    
+//    isFirstIn = YES;
+//    isShow = NO;
+//    
+//    //第一次copy到document中，以便以后读写
+//    int isCustomMenuPlist= [[NSUserDefaults standardUserDefaults] integerForKey:kCustomMenuPlist];
+//    if (0 == isCustomMenuPlist) {
+//        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:kCustomMenuPlist];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        
+//        NSString *plistPath = [Utilities documentsPath:kCustomMenuPlist];
+//        if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+//        {
+//            [Utilities deletePath:plistPath];
+//        }
+//        [[NSFileManager defaultManager] copyItemAtPath:[Utilities bundlePath:kCustomMenuPlist]
+//        toPath:plistPath
+//        error:nil];
+//    }else if (1 == isCustomMenuPlist){
+//        /*==判断是否有新功能加入,避免程序更新，新功能无法提示的BUG==*/
+//        /*==比较bundle和document中的文件是否相同==*/
+//        /*  1、bundle中文件比document下文件更新，并且功能点比多
+//         2、bundle中文件比document下文件更新，并且功能点比少
+//         3、bundle中文件比document下文件更新，并且功能点相同
+//         */
+//        
+//        NSString *plistPathInDoc = [Utilities documentsPath:kCustomMenuPlist];
+//        NSString *plistPathInBun = [Utilities bundlePath:kCustomMenuPlist];
+//        
+//        if ([[NSFileManager defaultManager] fileExistsAtPath:plistPathInDoc])
+//        {
+//            NSArray *arrayDoc = [[[NSArray alloc] initWithContentsOfFile:plistPathInDoc] autorelease];
+//            NSArray *arrayBun = [[[NSArray alloc] initWithContentsOfFile:plistPathInBun] autorelease];
+//            
+//            
+//            //            if (arrayBun.count != arrayDoc.count) {
+//            //                int count = arrayBun.count - arrayDoc.count;
+//            //                int newCount = count > 0 ? count:0;
+//            
+//            int newCount = 0;
+//            
+//            
+//            //                [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",newCount] forKey:kNewFunctionCount];
+//            
+//            NSMutableArray *tempArray = [[[NSMutableArray alloc] init] autorelease];
+//            for (NSDictionary *dict in arrayBun) {
+//                NSMutableDictionary *da = [[[NSMutableDictionary alloc] initWithDictionary:dict] autorelease];
+//                [tempArray addObject:da];
+//            }
+//            
+//            for (NSMutableDictionary *dd_1 in tempArray) {
+//                int index = 0;
+//                
+//                for (;index < arrayDoc.count;index ++) {
+//                    NSDictionary *dd_2 = [arrayDoc objectAtIndex:index];
+//                    if ([[dd_1 objectForKey:@"title"] isEqualToString:[dd_2 objectForKey:@"title"]]) {
+//                        [dd_1 setObject:[dd_2 objectForKey:@"select"] forKey:@"select"];
+//                        break;
+//                    }
+//                }
+//                if (index == arrayDoc.count) {
+//                    /*==新增加的功能点=*/
+//                    newCount ++;
+//                }
+//            }
+//            
+//            /*==去掉新增功能提示数字==*/
+//            newCount = 0;
+//            
+//            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",newCount] forKey:kNewFunctionCount];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [tempArray writeToFile:plistPathInDoc atomically:YES];
+//            
+//        }
+//    }
+//    //    }
+//    
+//    
+//    //ios7 下适配
+//    self.view.backgroundColor = [UIColor blackColor];
+//    
+//    UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0+kIOSHeight, 320, CGRectGetHeight(self.view.frame)+100)];
+//    [img setBackgroundColor:[UIColor whiteColor]];
+//    [self.view addSubview:img];
+//    [img release];
+//    
+//    CGRect rect = self.view.frame;
+//    
+//    UIImageView *navBgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0+kIOSHeight, CGRectGetWidth(rect), 44)];
+//    navBgView.image = [[Utilities loadImageByName:@"navBar.png"] stretchableImageWithLeftCapWidth:5 topCapHeight:5];
+//    [self.view addSubview:navBgView];
+//    [navBgView release];
+//    
+//    UIImageView *navLine1 = [[UIImageView alloc]initWithFrame:CGRectMake(445/2, 0+kIOSHeight, 2, 44)];
+//    navLine1.image = [Utilities loadImageByName:@"navBar_line.png"];
+//    [self.view addSubview:navLine1];
+//    [navLine1 release];
+//    
+//    UIImageView *navLine2 = [[UIImageView alloc]initWithFrame:CGRectMake(542/2, 0+kIOSHeight, 2, 44)];
+//    navLine2.image = [Utilities loadImageByName:@"navBar_line.png"];
+//    [self.view addSubview:navLine2];
+//    [navLine2 release];
+//    
+//    int width = 25;
+//    leftButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0+kIOSHeight, 445/2, 50)];
+//    [leftButton setTitle:@"尊敬的用户欢迎您,请登录" forState:UIControlStateNormal];
+//    [leftButton setTitleEdgeInsets:UIEdgeInsetsMake(-5, 0, 0, -22)];
+//    [leftButton setBackgroundImage:[Utilities loadImageByName:@"navBar_left_button_bg@2x.png"]
+//    forState:UIControlStateNormal];
+//    [leftButton setBackgroundImage:[Utilities loadImageByName:@"navBar_left_button_highlighted_bg@2x.png"]
+//    forState:UIControlStateHighlighted];
+//    [leftButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
+//    #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_6_0
+//	leftButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+//    #else
+//    leftButton.titleLabel.textAlignment = UITextAlignmentLeft;
+//    #endif
+//    [leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [leftButton addTarget:self
+//    action:@selector(ButtonLogin)
+//    forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:leftButton];
+//    
+//    ivIsLogin = [[UIImageView alloc] init];
+//    ivIsLogin.frame = CGRectMake(9, 9+kIOSHeight, width, width);
+//    ivIsLogin.image = [Utilities loadImageByName:@"home_nologin@2x.png"];
+//    [self.view addSubview:ivIsLogin];
+//    
+//    //箭头
+//    arrowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(198,18+kIOSHeight, 38/2, 18/2)];
+//    [self.view addSubview:arrowImageView];
+//    NSMutableArray *images = [[NSMutableArray alloc]initWithCapacity:7];
+//    for (int i=1; i<=4; i++) {
+//        [images addObject:[UIImage imageNamed:[NSString stringWithFormat:@"img_home_arrow%d@2x.png",i]]];
+//    }
+//    arrowImageView.animationImages = images;
+//    arrowImageView.animationDuration = 1.0f;
+//    
+//    UIButton *searchButton = [[UIButton alloc]initWithFrame:CGRectMake(470/2-13, 0+kIOSHeight, 50, 50)];
+//    [searchButton setImage:[Utilities loadImageByName:@"home_serach@2x.png"] forState:UIControlStateNormal];
+//    [searchButton setBackgroundImage:[Utilities loadImageByName:@"navBar_button@2x.png"]
+//    forState:UIControlStateNormal];
+//    [searchButton setBackgroundImage:[Utilities loadImageByName:@"navBar_button_highlighted@2x.png"]
+//    forState:UIControlStateHighlighted];
+//    [searchButton addTarget:self
+//    action:@selector(ButtonSearch)
+//    forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:searchButton];
+//    [searchButton setAdjustsImageWhenHighlighted:NO];
+//    [searchButton release];
+//    
+//    UIButton *rightButton = [[UIButton alloc]initWithFrame:CGRectMake(570/2 - 13, 0+kIOSHeight, 50, 50)];
+//    [rightButton setImage:[Utilities loadImageByName:@"home_camera_normal@2x.png"] forState:UIControlStateNormal];
+//    [rightButton setBackgroundImage:[Utilities loadImageByName:@"navBar_right_button@2x.png"]
+//    forState:UIControlStateNormal];
+//    [rightButton setBackgroundImage:[Utilities loadImageByName:@"navBar_right_button_highlighted@2x.png"]
+//    forState:UIControlStateHighlighted];
+//    [rightButton addTarget:self
+//    action:@selector(ButtonCamera)
+//    forControlEvents:UIControlEventTouchUpInside];
+//    [rightButton setAdjustsImageWhenHighlighted:NO];
+//    [self.view addSubview:rightButton];
+//    [rightButton release];
+//    
+//    
+//    //    tableViewMain = [[UITableView alloc]initWithFrame:CGRectMake(0, kNavHeight, CGRectGetWidth(rect), CGRectGetHeight(rect))];
+//    //    tableViewMain.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    //    tableViewMain.showsVerticalScrollIndicator = NO;
+//    //    tableViewMain.delegate = self;
+//    //    tableViewMain.dataSource = self;
+//    //    tableViewMain.clipsToBounds = YES;
+//    //    [self.view addSubview:tableViewMain];
+//    
+//    
+//    //下拉刷新table
+//    tableViewMain = [[PullingRefreshTableView alloc]initWithFrame:CGRectMake(0, kNavHeight+kIOSHeight, CGRectGetWidth(rect), CGRectGetHeight(rect)) pullingDelegate:self];;
+//    tableViewMain.backgroundColor = [UIColor clearColor];
+//    tableViewMain.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    tableViewMain.showsVerticalScrollIndicator = NO;
+//    tableViewMain.delegate = self;
+//    tableViewMain.dataSource = self;
+//    tableViewMain.clipsToBounds = YES;
+//    
+//    //去除下拉刷新界面上的背景和箭头
+//    //    LoadingView *headerView = [tableViewMain getHeaderView];
+//    //    headerView.backgroundColor = [UIColor whiteColor];
+//    //    [headerView fitSelfView4Home];
+//    
+//    [self.view addSubview:tableViewMain];
+//    
+//    tableViewMain.headerOnly = YES;
+//    
+//    //充值提示
+//    pushView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenHeight(self)- 35 + kIOSHeight, 320, 30)];
+//    pushView.backgroundColor = [UIColor getColor:@"fff6c5"];
+//    pushView.userInteractionEnabled = YES;
+//    pushView.layer.masksToBounds = YES;
+//    pushView.layer.borderColor = [[UIColor yellowColor] CGColor];
+//    [self.view addSubview:pushView];
+//    [pushView release];
+//    
+//    pushInfo = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 280, 20)];
+//    pushInfo.backgroundColor = [UIColor clearColor];
+//    pushInfo.textAlignment = UITextAlignmentCenter;
+//    pushInfo.font = [UIFont systemFontOfSize:13];
+//    pushInfo.textColor = [UIColor getColor:@"4f4f4f"];
+//    pushInfo.text = @"推送消息推送消息推送消息推送消息推送消息推送消息推送消息";
+//    [pushView addSubview:pushInfo];
+//    
+//    UITapGestureRecognizer *tapRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openSource:)] autorelease];
+//    tapRecognizer.delegate = self;
+//    [tapRecognizer setNumberOfTapsRequired:1];
+//    [tapRecognizer setNumberOfTouchesRequired:1];
+//    [pushView addGestureRecognizer:tapRecognizer];
+//    
+//    closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    closeBtn.frame = CGRectMake(296 , 7 , 16, 16);
+//    [closeBtn setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
+//    [closeBtn addTarget:self action:@selector(closePushView:) forControlEvents:UIControlEventTouchUpInside];
+//    [pushView addSubview:closeBtn];
+//    
+//    tableViewMain.frame = CGRectMake(0, kNavHeight+kIOSHeight, CGRectGetWidth(rect), CGRectGetHeight(rect)-30);
+//    
+//    //    [pushView setHidden:YES];
+//    
+//}
+//
+//- (void)viewDidLoad
+//{
+//    [super viewDidLoad];
+//    
+//    arrHomeSelectIcon = [[NSMutableArray alloc] init];
+//    [self reloadIconPlist];
+//    
+//    CGRect rect = self.view.frame;
+//    
+//    //广告视图
+//    CGRect rectAd = CGRectMake(0, 0, CGRectGetWidth(rect), 293/2);
+//    homeAdView = [[HomeAdView alloc] initWithFrame:rectAd];
+//    homeAdView.delegate = self;
+//    
+//    //九宫格
+//    CGRect rectIcons = CGRectMake(0, 0, CGRectGetWidth(rect), 180/2*4); //4行
+//    homeIconView = [[HomeIconView alloc] initWithFrame:rectIcons];
+//    homeIconView.backgroundColor = [UIColor whiteColor];
+//    homeIconView.delegate = self;
+//    homeIconView.arrIcons = arrHomeSelectIcon;
+//    
+//    
+//    /*====每天首次进入加载====*/
+//    NSString *lastUpadateAdDate = [[NSUserDefaults standardUserDefaults] objectForKey:kHomeAdLastRefreshData];
+//    
+//    NSDateFormatter *formater = [[[NSDateFormatter alloc] init] autorelease];
+//    [formater setDateFormat:@"yyy-MM-dd"];
+//    NSString *currentDate = [formater stringFromDate:[NSDate date]];
+//    
+//    if (![currentDate isEqualToString:lastUpadateAdDate])
+//    {
+//        //一天首次进入程序请求用户数据
+//        [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:kHomeAdLastRefreshData];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        [self getHomeAdData];
+//    }
+//}
+//
+////判断点击的是按钮还是tap 是按钮则不获取tap点击事件，否则获取
+//-(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+//{
+//    if (touch.view == closeBtn) {
+//        return NO;
+//    }
+//    return YES;
+//}
+//
+////打开推送信息
+//-(void) openSource:(id)sender
+//{
+//    NSLog(@"openSource");
+//}
+//
+////关闭推送悬浮通知栏
+//-(void) closePushView:(id)sender
+//{
+//    NSLog(@"colse");
+//    [pushView setHidden:YES];
+//    CGRect rect = self.view.frame;
+//    if (ISIOS7) {
+//        tableViewMain.frame = CGRectMake(0, kNavHeight+kIOSHeight, CGRectGetWidth(rect), CGRectGetHeight(rect)-44-69);
+//    } else {
+//        tableViewMain.frame = CGRectMake(0, kNavHeight+kIOSHeight, CGRectGetWidth(rect), CGRectGetHeight(rect)-44);
+//    }
+//}
+//
+//- (void)dealloc
+//{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [tableViewMain release];
+//    [arrHomeSelectIcon release];
+//    [homeAdView release];
+//    [homeIconView release];
+//    [leftButton release];
+//    [ivIsLogin release];
+//    if(arrowImageView)
+//    {
+//        [arrowImageView release];
+//        arrowImageView = nil;
+//    }
+//    
+//    /*
+//     if(loginConnection)
+//     {
+//     [self.loginConnection cancel];
+//     [loginConnection release];
+//     loginConnection = nil;
+//     }
+//     */
+//    [super dealloc];
+//}
+//
+//- (void)didReceiveMemoryWarning
+//{
+//    [super didReceiveMemoryWarning];
+//    // Dispose of any resources that can be recreated.
+//}
+//
+//#pragma mark - PullingRefreshTableViewDelegate
+//- (void)pullingTableViewDidStartRefreshing:(PullingRefreshTableView *)tableView{
+//    self.refreshing = YES;
+//    //请求刷新主页数据
+//    [self performSelector:@selector(getHomeAdData) withObject:nil afterDelay:0.5f];
+//}
+//
+//- (NSDate *)pullingTableViewRefreshingFinishedDate{
+//    [Utilities lastUpdate:@"更新" withTimeDuration:1.0];
+//    NSDate *date = [NSDate date];
+//    return date;
+//}
+//
+//- (void)pullingTableViewDidStartLoading:(PullingRefreshTableView *)tableView{
+//    //请求刷新主页数据
+//    [self performSelector:@selector(getHomeAdData) withObject:nil afterDelay:0.5f];
+//}
+//
+//
+//#pragma mark - Scroll
+//
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    [tableViewMain tableViewDidScroll:scrollView];
+//}
+//
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+//    [tableViewMain tableViewDidEndDragging:scrollView];
+//}
+//
+//#pragma mark tableView
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return 2;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (0 == indexPath.row) {
+//        return CGRectGetHeight(homeAdView.frame);
+//    }
+//    else if (1 == indexPath.row) {
+//        return CGRectGetHeight(homeIconView.frame);
+//    }
+//    else
+//    return 0;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+//    reuseIdentifier:nil] autorelease];
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    
+//    if (0 == indexPath.row)
+//    {
+//        [cell.contentView addSubview:homeAdView];
+//    }
+//    else if (1 == indexPath.row)
+//    {
+//        [cell.contentView addSubview:homeIconView];
+//    }
+//    return cell;
+//}
+//#pragma mark - BaseAlertView delegate
+//- (void)baseAlertView:(BaseAlertView *)alertView clickBtnAtIndex:(NSInteger)btnIndex
+//{
+//    EcmcAppDelegate* appDelegate = (EcmcAppDelegate*) [[UIApplication sharedApplication] delegate];
+//    UINavigationController * nav = (UINavigationController*)[appDelegate.customTabBarController.viewControllers objectAtIndex:appDelegate.customTabBarController.selectedIndex];
+//    
+//    if(alertView.tag == 20130422)
+//    {
+//        if(btnIndex == 1) //
+//        {
+//            WebViewCustom *webView = [[WebViewCustom alloc]init];
+//            webView.urlString = joinUrl;
+//            [webView  setHidesBottomBarWhenPushed:YES];
+//            webView.title = @"营销活动";
+//            [nav pushViewController:webView animated:YES];
+//            [webView release];
+//            webView = nil;
+//        }
+//    }
+//    else if(alertView.tag == 20130423)
+//    {
+//        if(btnIndex == 1) //
+//        {
+//            WebViewCustom *webView = [[WebViewCustom alloc]init];
+//            webView.urlString = joinUrl;
+//            [webView  setHidesBottomBarWhenPushed:YES];
+//            webView.title = @"热门精彩";
+//            [nav pushViewController:webView animated:YES];
+//            [webView release];
+//            webView = nil;
+//        }
+//    }
+//    
+//}
+//
+//@end
+
