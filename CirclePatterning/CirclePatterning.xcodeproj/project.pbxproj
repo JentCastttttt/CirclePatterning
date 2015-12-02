@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44FB03D61C0ED43B00647DE4 /* SNView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44FB03D51C0ED43B00647DE4 /* SNView.m */; };
 		9E373481185FEF7900BF91E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E373480185FEF7900BF91E6 /* Foundation.framework */; };
 		9E373483185FEF7900BF91E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E373482185FEF7900BF91E6 /* CoreGraphics.framework */; };
 		9E373485185FEF7900BF91E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E373484185FEF7900BF91E6 /* UIKit.framework */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44FB03D41C0ED43B00647DE4 /* SNView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNView.h; sourceTree = "<group>"; };
+		44FB03D51C0ED43B00647DE4 /* SNView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNView.m; sourceTree = "<group>"; };
 		9E37347D185FEF7900BF91E6 /* CirclePatterning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CirclePatterning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E373480185FEF7900BF91E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9E373482185FEF7900BF91E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -135,6 +138,8 @@
 				9E53B8A918728FEB00A2540F /* BBCyclingLabel.m */,
 				9E373498185FEF7900BF91E6 /* Images.xcassets */,
 				9E373487185FEF7900BF91E6 /* Supporting Files */,
+				44FB03D41C0ED43B00647DE4 /* SNView.h */,
+				44FB03D51C0ED43B00647DE4 /* SNView.m */,
 			);
 			path = CirclePatterning;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E3734B9185FEFC300BF91E6 /* CircleLineView.m in Sources */,
+				44FB03D61C0ED43B00647DE4 /* SNView.m in Sources */,
 				9E373497185FEF7900BF91E6 /* ViewController.m in Sources */,
 				9E373491185FEF7900BF91E6 /* AppDelegate.m in Sources */,
 				9E37348D185FEF7900BF91E6 /* main.m in Sources */,
