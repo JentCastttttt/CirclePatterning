@@ -37,6 +37,10 @@
     [self.view addSubview:slope];
     [slope release];
    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 64, 100, 20)];
+    label.text = @"Label Branch";
+    label.font = [UIFont systemFontOfSize:13.0f];
+    [self.view addSubview:label];
 }
 
 
