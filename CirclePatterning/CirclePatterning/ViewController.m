@@ -36,8 +36,6 @@
     slope.transform = CGAffineTransformMakeRotation(-M_PI_4);
     [self.view addSubview:slope];
     [slope release];
-    
-    self.view.backgroundColor = [UIColor colorWithRed:0.18 green:0.71 blue:0.92 alpha:1];
    
 }
 
